@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./recepy.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    
+
+    <title>Beer  app</title>
+  </head>
+  <body id="body">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="">Beer bar </a>
+      <div>
+        <ul class="navbar-nav" id="mainMenu" >
+          <li><a class="dropdown-item " id="allBeers" href="">All Beers</a></li>
+          <li><a class="dropdown-item" id="randomBeerButton">Random Beer</a></li>
+     
+      </div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <span></span>
+        <ul class="navbar-nav mr-auto"></ul>
+        <div class="navbar-nav" > 
+        <input id = "searchInputValue"type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button  id = "searchButton" type="button" class="btn btn-info">
+          search
+        </button>
+          
+        </span>
+      <!-- </div>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#">About</a>
+          <a class="nav-item nav-link" href="#">Menu</a>
+          <a class="nav-item nav-link" href="#">Contact</a>
+        </div>
+      </div> -->
+    </nav>
+    <!-- Example single danger button -->
+   
+  
+ <div id="subMenu" style="display: none;"> 
+    <div >
+      <ul class="row">
+        <li><button onclick="showBeersDropDown()" type="button"  style="margin: 20px" class="btn btn-secondary">SHOW BEERS</button></li>
+        <span id = "showBeers" style= "display: none; margin-left: 20px;margin-top: 20px "> 
+        <li><a class="dropdown-item beers-per-page " id="beers-10"  data-value="10" href=""> 10 Beers </a></li>
+        <li><a class="dropdown-item beers-per-page" id="beers-20"  data-value="20"> 20 Beers</a></li>
+        <li><a class="dropdown-item beers-per-page"  id="beers-30"  data-value="30"> 30 Beers</a></li>
+        <li><a class="dropdown-item beers-per-page"  id="beers-40"  data-value="40"> 40 Beers</a></li>
+      </span>
+    </div>
+    <div>
+      <ul class="row">
+        <li><button   style="margin-left: 20px; margin-top: -50px" onclick="sortBeersDropDown()" type="button" class="btn btn-secondary">SORT</button></li>
+        <span id = "sortBeers" style= "display: none"> 
+        <li><a href="#" class="dropdown-item" id="sort-by-name-asc"
+        ><i class="fa-solid fa-arrow-up"></i> Name A-Z ↑</a
+      ></li>
+      <li><a href="#" class="dropdown-item" id="sort-by-name-des"
+        ><i class="fa-solid fa-arrow-down"></i> Name Z-A ↓</a
+      ></li>
+      <li> <a href="#" class="dropdown-item" id="sort-by-abv-asc"
+        ><i class="fa-solid fa-arrow-up"></i> ABV ↑</a
+      ></li>
+      <li> <a href="#" class="dropdown-item" id="sort-by-abv-des"
+        ><i class="fa-solid fa-arrow-down"></i> ABV ↓</a
+      ></li>
+      <li> <a href="#" class="dropdown-item" id="sort-by-ibu-asc"
+        ><i class="fa-solid fa-arrow-up"></i> Bitterness ↑</a
+      ></li>
+      <li><a href="#" class="dropdown-item" id="sort-by-ibu-des"
+        ><i class="fa-solid fa-arrow-down"></i> Bitterness ↓</a
+      ></li>
+      <li>  <a href="#" class="dropdown-item" id="sort-by-date-asc"
+        ><i class="fa-solid fa-arrow-up"></i> Production date
+        oldest ↑</a
+      ></li>
+      <li> <a href="#" class="dropdown-item" id="sort-by-date-des"
+        ><i class="fa-solid fa-arrow-down"></i> Production date 
+        newest ↓</a
+      ></li>
+    </span>
+    </div>
+    <!-- class="progress hidden" -->
+  </div>
+  <div id="loading-bar">
+    <div id="loading-bar-progress"></div>
+  </div>
+    <div id="heroContainer"> 
+    <div class="container">
+      <img  id = "img"src="https://dced.pa.gov/wp-content/uploads/2019/09/Header-Image-Troegs-resize-1100x536.jpg" alt="">
+      <div class="text-block">
+        <h4 class="title">HELLO BEER LOVERS</h4>
+        <p>Beer is the oldest and most widely consumed type of alcoholic drink in the world, and the third most popular drink overall after potable water and tea. It is produced by the brewing and fermentation of starches, mainly derived from cereal grains—most commonly from malted barley, though wheat, maize (corn), rice, and oats are also used. During the brewing process, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizing agent.</p>
+      </div>
+    </div>
+    <h3 id="traveler"> Hello Traveler</h3>
+    <div class="row">
+      
+      <div class="col-lg" id ="paragraphs">
+        <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
+        <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
+        <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
+        <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
+      </div>
+<div class="col-lg">
+      <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" alt="beer pint" class="img-thumbnail">
+    </div>
+    </div>
+  </div>
+    <div id="cointener" class="">
+     
+    </div>
+    <div id = "backButonFromAllBeers" style= "display: none" >
+      <button id="backButonFromAllBeers" onclick="backButonFromBeers()" type="button" class="btn btn-outline-secondary" ><- Back</button>
+    </div>
+    <div id = "secondButtonBack" style= "display: block" >
+      <button id="backButtonFromRandomBeer" onclick="backButtonFromRandomBeer()" type="button" class="btn btn-outline-primary" ><- Back</button>
+    </div>
+    <div id = "pagesButton" >
+      
+      <!-- <p  id ="pageNumberPrevius" style="display: inline-block;">1</p>
+      <p  id ="pageNumber"style="display: inline-block;">1</p>
+      <p  id ="pageNumberNext"style="display: inline-block;">1</p> -->
+  <br>
+   
+      <button id="previusButton"  type="button" class="btn btn-outline-secondary" ><- Previus</button>
+      <p  id ="pageNumberPrevius" class="larger" style="display: inline-block;">0</p>
+      <p  id ="pageNumber" class="larger" style="display: inline-block;">1</p>
+      <p  id ="pageNumberNext" class="larger" style="display: inline-block;">2</p>
+      <button id="nextButton" type="button" class="btn btn-outline-secondary" > Next -></button>
+    </div>
+    <div id ="beerDetails" class="hidden row"> 
+    </div>
+    <div id ="randomBeer" class="row">
+      
+    </div>
+    <div  id = "alertShow" class="alert alert-warning alert-dismissible fade show col-md-6" role="alert">
+      <strong>Not Founded!</strong> You should check again.
+      <button  id = "alertCloseButton" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+ 
+    <script src="./recepy.js"></script>
+  </body>
+</html>
