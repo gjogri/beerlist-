@@ -11,11 +11,6 @@
     <link rel="stylesheet" type="text/css" href="./recepy.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
 
     <title>Beer  app</title>
   </head>
@@ -23,10 +18,9 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="">Beer bar </a>
       <div>
-        <ul class="navbar-nav" id="mainMenu" >
+        <ul class="navbar-nav" id="mainMenu">
           <li><a class="dropdown-item " id="allBeers" href="">All Beers</a></li>
           <li><a class="dropdown-item" id="randomBeerButton">Random Beer</a></li>
-     
       </div>
       <button
         class="navbar-toggler"
@@ -49,22 +43,15 @@
         </button>
           
         </span>
-      <!-- </div>
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="#">About</a>
-          <a class="nav-item nav-link" href="#">Menu</a>
-          <a class="nav-item nav-link" href="#">Contact</a>
-        </div>
-      </div> -->
     </nav>
-    <!-- Example single danger button -->
+
    
   
  <div id="subMenu" style="display: none;"> 
     <div >
       <ul class="row">
         <li><button onclick="showBeersDropDown()" type="button"  style="margin: 20px" class="btn btn-secondary">SHOW BEERS</button></li>
-        <span id = "showBeers" style= "display: none; margin-left: 20px;margin-top: 20px "> 
+        <span id="showBeers" style= "display: none; margin-left: 20px;margin-top: 20px "> 
         <li><a class="dropdown-item beers-per-page " id="beers-10"  data-value="10" href=""> 10 Beers </a></li>
         <li><a class="dropdown-item beers-per-page" id="beers-20"  data-value="20"> 20 Beers</a></li>
         <li><a class="dropdown-item beers-per-page"  id="beers-30"  data-value="30"> 30 Beers</a></li>
@@ -110,7 +97,7 @@
   </div>
     <div id="heroContainer"> 
     <div class="container">
-      <img  id = "img"src="https://dced.pa.gov/wp-content/uploads/2019/09/Header-Image-Troegs-resize-1100x536.jpg" alt="">
+      <img  id="img"src="https://dced.pa.gov/wp-content/uploads/2019/09/Header-Image-Troegs-resize-1100x536.jpg" alt="">
       <div class="text-block">
         <h4 class="title">HELLO BEER LOVERS</h4>
         <p>Beer is the oldest and most widely consumed type of alcoholic drink in the world, and the third most popular drink overall after potable water and tea. It is produced by the brewing and fermentation of starches, mainly derived from cereal grains—most commonly from malted barley, though wheat, maize (corn), rice, and oats are also used. During the brewing process, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizing agent.</p>
@@ -119,7 +106,7 @@
     <h3 id="traveler"> Hello Traveler</h3>
     <div class="row">
       
-      <div class="col-lg" id ="paragraphs">
+      <div class="col-lg" id="paragraphs">
         <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
         <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
         <p>, fermentation of the starch sugars in the wort produces ethanol and carbonation in the resulting beer. Most modern beer is brewed with hops, which add bitterness and other flavours and act as a natural preservative and stabilizin</p>
@@ -165,5 +152,6 @@
     </div>
  
     <script src="./recepy.js"></script>
+    <script src="./filter.js"></script>
   </body>
 </html>

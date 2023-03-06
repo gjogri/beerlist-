@@ -150,17 +150,14 @@ function appendBeer(singleBeer) {
 
   divFooter.classList.add("card-footer");
 
-  divPerent.classList.add("card");
-  divPerent.classList.add("col-md");
+  divPerent.classList.add("card", "col-md");
   divPerent.append(divHeader, divBody, divFooter);
-  beerDetails.appendChild(imgDiv);
-  beerDetails.appendChild(divPerent);
+  beerDetails.appendChild(imgDiv, divPerent);
 }
 allBeersToghether.addEventListener("click", (e) => {
   subMenu.style.display = "block";
   beerDetails.innerHTML = " ";
   e.preventDefault();
-  console.log("TEST");
   allBeers.classList.add("item-grid");
   allBeers.style.display = "block";
   pagesButton.style.display = "block";
@@ -176,7 +173,6 @@ allBeersToghether.addEventListener("click", (e) => {
 });
 // na pocetna da gi dade so BUTTON DETAILS
 function renderBeer(data) {
-  // console.log(data);
   data.forEach((singleBeer) => {
     searchedBeerAppend(singleBeer);
   });
@@ -202,6 +198,7 @@ function backButtonFromRandomBeer() {
   secondButtonBack.style.display = "none";
 }
 function getRandomBeer() {
+  console.log("get random");
   // subMenu.style.display = "none";
   // subMenu.classList.add("hidden");
   randomBeerButton.addEventListener("click", function () {
@@ -291,8 +288,8 @@ getRandomBeer();
 function newBeer(singleBeer) {
   console.log("test");
 
-  let imgDiv = document.createElement("div");
-  let showImg = document.createElement("img");
+  let imgDiv = document.createElement("div"); // beer tile
+  let showImg = document.createElement("img"); // single beer image
   showImg.src = singleBeer.image_url;
   showImg.classList.add("showImg");
   showImg.classList.add("col-md");
@@ -585,7 +582,7 @@ previusButton.addEventListener("click", function () {
   startLoading();
   const fetchUrl = `https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=${itemsPerPage}`;
 
-  https: axios
+  axios
     .request(fetchUrl)
     .then((response) => {
       console.log(response, "response PREVIUS BUTTON");
@@ -614,7 +611,7 @@ nextButton.addEventListener("click", function () {
 
   //
   startLoading();
-  https: axios
+  axios
     .request(fetchUrl)
     .then((response) => {
       console.log(currentPage);
